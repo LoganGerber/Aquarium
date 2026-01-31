@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5nv74krncllf"]
+
+[ext_resource type="Script" uid="uid://c12x7q3elgkus" path="res://Scenes/Tank/Tank.cs" id="1_gpcfw"]
+[ext_resource type="PackedScene" uid="uid://bcxt404h6ay68" path="res://Scenes/Fish/fish.tscn" id="2_x633a"]
+
+[node name="Tank" type="Node2D"]
+script = ExtResource("1_gpcfw")
+
+[node name="Fish" parent="." instance=ExtResource("2_x633a")]
+position = Vector2(102, 63)

@@ -1,0 +1,57 @@
+[gd_scene load_steps=15 format=3 uid="uid://bcxt404h6ay68"]
+
+[ext_resource type="Script" uid="uid://dcgqiqe6kjjb3" path="res://Scenes/Fish/Fish.cs" id="1_r17d5"]
+[ext_resource type="Texture2D" uid="uid://df2o2p0ypk3xt" path="res://Assets/Pixel Gnome Fishing Pack/Salt Water/Anchovy.png" id="2_2ykiy"]
+[ext_resource type="Script" uid="uid://n7cmcr0svucq" path="res://AI/Tasks/FishAI/select_new_point.gd" id="3_botaw"]
+[ext_resource type="Script" uid="uid://djstbr1vxt3de" path="res://AI/Tasks/FishAI/move_to_point.gd" id="4_2ykiy"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_rrrj0"]
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_2ykiy"]
+min_duration = 0.1
+max_duration = 1.0
+
+[sub_resource type="BTAction" id="BTAction_g2hud"]
+script = ExtResource("3_botaw")
+
+[sub_resource type="BTAction" id="BTAction_vddew"]
+script = ExtResource("4_2ykiy")
+
+[sub_resource type="BTSequence" id="BTSequence_30gcr"]
+custom_name = "BasicMove"
+children = [SubResource("BTAction_g2hud"), SubResource("BTAction_vddew")]
+
+[sub_resource type="BTRandomSelector" id="BTRandomSelector_832ja"]
+children = [SubResource("BTSequence_30gcr")]
+
+[sub_resource type="BTSequence" id="BTSequence_kc0gn"]
+children = [SubResource("BTRandomWait_2ykiy"), SubResource("BTRandomSelector_832ja")]
+
+[sub_resource type="BehaviorTree" id="BehaviorTree_g2hud"]
+blackboard_plan = SubResource("BlackboardPlan_rrrj0")
+root_task = SubResource("BTSequence_kc0gn")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_vddew"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q28ix"]
+radius = 8.0
+height = 18.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_r17d5")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 1)
+texture = ExtResource("2_2ykiy")
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = SubResource("BehaviorTree_g2hud")
+blackboard_plan = SubResource("BlackboardPlan_vddew")
+
+[node name="Fish" type="Area2D" parent="."]
+
+[node name="Collider" type="CollisionShape2D" parent="Fish"]
+unique_name_in_owner = true
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_q28ix")
