@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dde0gcvj156q6"]
+
+[ext_resource type="Texture2D" uid="uid://bufg82h8fnl7n" path="res://Assets/kenney_game-icons/Vector/vector_whiteIcons.svg" id="1_c6tbd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivdya"]
+atlas = ExtResource("1_c6tbd")
+region = Rect2(554, 255, 33, 30)
+
+[node name="ShopIcon" type="TextureRect"]
+offset_right = 100.0
+offset_bottom = 100.0
+texture = SubResource("AtlasTexture_ivdya")
