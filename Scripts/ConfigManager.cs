@@ -36,7 +36,7 @@ public partial class ConfigManager : Singleton<ConfigManager>
 		}
 	}
 
-	public float GetFishBobSpeed(Fish.FISH_TYPE fishType)
+	public float GetFishBobSpeed(FishManager.FISH_TYPE fishType)
 	{
 		return GetFishBobSpeed(Enum.GetName(fishType));
 	}
@@ -46,7 +46,7 @@ public partial class ConfigManager : Singleton<ConfigManager>
 		return configCache.GetValue(fishType, "bobSpeed").AsSingle();
 	}
 
-	public int GetFishCost(Fish.FISH_TYPE fishType)
+	public int GetFishCost(FishManager.FISH_TYPE fishType)
 	{
 		return GetFishCost(Enum.GetName(fishType));
 	}
@@ -56,7 +56,7 @@ public partial class ConfigManager : Singleton<ConfigManager>
 		return configCache.GetValue(fishType, "cost").AsInt32();
 	}
 
-	public float GetFishSpeed(Fish.FISH_TYPE fishType)
+	public float GetFishSpeed(FishManager.FISH_TYPE fishType)
 	{
 		return GetFishSpeed(Enum.GetName(fishType));
 	}
@@ -72,7 +72,7 @@ public partial class ConfigManager : Singleton<ConfigManager>
 		ConfigFile config = new ConfigFile();
 		config.Load(configPath);
 
-		foreach (string fishType in Enum.GetNames<Fish.FISH_TYPE>())
+		foreach (string fishType in Enum.GetNames<FishManager.FISH_TYPE>())
 		{
 			if (config.HasSection(fishType))
 			{
