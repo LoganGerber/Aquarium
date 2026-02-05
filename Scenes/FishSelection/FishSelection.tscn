@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjno2tq77b1td"]
+
+[ext_resource type="Texture2D" uid="uid://d3xtgjvfaocdf" path="res://Assets/Pixel Gnome Fishing Pack/Fresh Water/Angelfish.png" id="1_a33td"]
+
+[node name="FishSelection" type="Button"]
+offset_right = 73.0
+offset_bottom = 70.0
+text = "test text"
+icon = ExtResource("1_a33td")
+icon_alignment = 1
+vertical_icon_alignment = 0
