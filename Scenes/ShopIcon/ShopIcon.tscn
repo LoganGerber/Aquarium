@@ -3,6 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dudxgrctqi0uf" path="res://Assets/kenney_game-icons/Vector/shoppingcart.png" id="1_c6tbd"]
 
 [node name="TextureButton" type="TextureButton"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 512.0
+offset_bottom = 512.0
 texture_normal = ExtResource("1_c6tbd")
