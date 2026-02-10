@@ -1,13 +1,11 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 
 public partial class Fish : Node2D
 {
 	private Sprite2D sprite;
 
 	[Export]
-	private FishManager.FISH_TYPE fishType;
+	private string fishType;
 
 	private bool isHovered;
 
@@ -30,7 +28,7 @@ public partial class Fish : Node2D
 
 	public double Score { get; set; }
 
-	public FishManager.FISH_TYPE FishType
+	public string FishType
 	{
 		get
 		{
@@ -114,7 +112,7 @@ public partial class Fish : Node2D
 
 	public void OnBobSpeedUpdated(string fishType, float newBobSpeed)
 	{
-		if (Enum.Parse<FishManager.FISH_TYPE>(fishType) == this.fishType)
+		if (string.Equals(fishType, this.fishType))
 		{
 			bobSpeed = newBobSpeed;
 		}
@@ -122,7 +120,7 @@ public partial class Fish : Node2D
 
 	public void OnSpeedUpdated(string fishType, float newSpeed)
 	{
-		if (Enum.Parse<FishManager.FISH_TYPE>(fishType) == this.fishType)
+		if (string.Equals(fishType, this.fishType))
 		{
 			Speed = newSpeed;
 		}
