@@ -33,7 +33,7 @@ public partial class SaveManager : Singleton<SaveManager>
 	private void Save()
 	{
 		saveDataCache.fishInfo = FishManager.Instance.GetAllFishData();
-		// saveData.userMoney = MoneyManager.Instance.GetCurrentMoney();
+		saveDataCache.userMoney = MoneyManager.Instance.GetCurrentMoney();
 
 		Error err = ResourceSaver.Save(saveDataCache, savePath);
 		if (err != Error.Ok)
