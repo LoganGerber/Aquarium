@@ -1,5 +1,5 @@
 using Godot;
-using System;
+using System.Collections.Generic;
 
 public partial class Shop : PanelContainer
 {
@@ -21,28 +21,43 @@ public partial class Shop : PanelContainer
 
 	private Button exitButton;
 
+	private List<FishSelection> fishButtons;
+
 
 
 	public override void _Ready()
 	{
 		base._Ready();
+		fishButtons = new List<FishSelection>();
+
 		optionsGrid = GetNode<GridContainer>("%FishOptions");
 		buyButton = GetNode<Button>("%BuyButton");
 		exitButton = GetNode<Button>("%ExitButton");
 
 		string[] allFishTypes = ConfigManager.Instance.GetAllFishTypes();
+		int currentMoney = MoneyManager.Instance.GetCurrentMoney();
 		foreach (string fish in allFishTypes)
 		{
+			int fishPrice = ConfigManager.Instance.GetFishCost(fish);
+
 			FishSelection fishButton = fishSelectionScene.Instantiate<FishSelection>();
-			fishButton.Text = fish;
+			fishButton.Text = fish + "\n$" + fishPrice.ToString();
 			fishButton.Icon = FishManager.Instance.GetFishTexture(fish);
 			fishButton.FishType = fish;
 			fishButton.FishSelected += OnFishSelected;
+			if (fishPrice > currentMoney)
+			{
+				fishButton.Disabled = true;
+			}
 
 			optionsGrid.AddChild(fishButton);
+			fishButtons.Add(fishButton);
 		}
 
 		buyButton.Disabled = true;
+
+		MoneyManager.Instance.MoneyAdded += OnMoneyChanged;
+		MoneyManager.Instance.MoneyRemoved += OnMoneyChanged;
 	}
 
 	public void OnFishSelected(string fishType)
@@ -59,5 +74,18 @@ public partial class Shop : PanelContainer
 	public void OnExitButtonPressed()
 	{
 		EmitSignal(SignalName.ExitButtonPressed);
+	}
+
+	public void OnMoneyChanged(int _)
+	{
+		int newMoney = MoneyManager.Instance.GetCurrentMoney();
+
+		foreach (FishSelection fishButton in fishButtons)
+		{
+			string fishType = fishButton.FishType;
+			int fishPrice = ConfigManager.Instance.GetFishCost(fishType);
+
+			fishButton.Disabled = newMoney < fishPrice;
+		}
 	}
 }

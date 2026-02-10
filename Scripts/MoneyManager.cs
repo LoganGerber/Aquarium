@@ -19,7 +19,8 @@ public partial class MoneyManager : Singleton<MoneyManager>
 		base._Ready();
 
 		SaveManager.Instance.GameLoad += OnSaveLoad;
-		currentMoney = SaveManager.Instance.SaveDataCache.userMoney;
+		// currentMoney = SaveManager.Instance.SaveDataCache.userMoney;
+		currentMoney = 300;
 	}
 
 	public int GetCurrentMoney()
