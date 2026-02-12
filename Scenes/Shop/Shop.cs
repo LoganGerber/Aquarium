@@ -92,6 +92,7 @@ public partial class Shop : PanelContainer
 	public void OnMoneyChanged(int _)
 	{
 		int newMoney = MoneyManager.Instance.GetCurrentMoney();
+		FishSelection selectedFish = fishButtonGroup.GetPressedButton() as FishSelection;
 
 		foreach (FishSelection fishButton in fishButtons)
 		{
@@ -107,6 +108,13 @@ public partial class Shop : PanelContainer
 			{
 				fishButton.Disabled = true;
 				fishButton.FocusMode = FocusModeEnum.None;
+
+				if (fishButton == selectedFish)
+				{
+					fishButton.ButtonPressed = false;
+					buyButton.Disabled = true;
+					buyButton.FocusMode = FocusModeEnum.None;
+				}
 			}
 		}
 	}
