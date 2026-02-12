@@ -48,6 +48,8 @@ public partial class Shop : PanelContainer
 			if (fishPrice > currentMoney)
 			{
 				fishButton.Disabled = true;
+				fishButton.FocusMode = FocusModeEnum.None;
+
 			}
 
 			optionsGrid.AddChild(fishButton);
@@ -85,7 +87,16 @@ public partial class Shop : PanelContainer
 			string fishType = fishButton.FishType;
 			int fishPrice = ConfigManager.Instance.GetFishCost(fishType);
 
-			fishButton.Disabled = newMoney < fishPrice;
+			if (fishPrice <= newMoney)
+			{
+				fishButton.Disabled = false;
+				fishButton.FocusMode = FocusModeEnum.All;
+			}
+			else
+			{
+				fishButton.Disabled = true;
+				fishButton.FocusMode = FocusModeEnum.None;
+			}
 		}
 	}
 }
