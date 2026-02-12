@@ -8,6 +8,7 @@ offset_right = 73.0
 offset_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+toggle_mode = true
 text = "test text"
 icon = ExtResource("1_a33td")
 autowrap_mode = 3

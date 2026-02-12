@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpch5gn1jc36"]
+[gd_scene load_steps=6 format=3 uid="uid://dpch5gn1jc36"]
 
 [ext_resource type="Script" uid="uid://dqjf0sycdydhf" path="res://Scenes/Shop/Shop.cs" id="1_lgpxb"]
 [ext_resource type="PackedScene" uid="uid://bjno2tq77b1td" path="res://Scenes/FishSelection/FishSelection.tscn" id="2_ora3x"]
+[ext_resource type="ButtonGroup" uid="uid://bgafo81ky64kt" path="res://Scenes/Shop/FishShopButtonGroup.tres" id="3_lgpxb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vauai"]
 bg_color = Color(0.49747366, 0.49747372, 0.49747354, 1)
@@ -15,6 +16,7 @@ offset_bottom = 105.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_vauai")
 script = ExtResource("1_lgpxb")
 fishSelectionScene = ExtResource("2_ora3x")
+fishButtonGroup = ExtResource("3_lgpxb")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

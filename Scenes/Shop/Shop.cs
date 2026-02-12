@@ -13,9 +13,10 @@ public partial class Shop : PanelContainer
 	[Export]
 	private PackedScene fishSelectionScene;
 
-	private GridContainer optionsGrid;
+	[Export]
+	private ButtonGroup fishButtonGroup;
 
-	private string currentFishSelection = null;
+	private GridContainer optionsGrid;
 
 	private Button buyButton;
 
@@ -44,8 +45,8 @@ public partial class Shop : PanelContainer
 			fishButton.Text = fish + "\n$" + fishPrice.ToString();
 			fishButton.Icon = FishManager.Instance.GetFishTexture(fish);
 			fishButton.FishType = fish;
-			fishButton.FishSelected += OnFishSelected;
 			fishButton.Cost = fishPrice;
+			fishButton.ButtonGroup = fishButtonGroup;
 			if (fishPrice > currentMoney)
 			{
 				fishButton.Disabled = true;
@@ -62,21 +63,25 @@ public partial class Shop : PanelContainer
 			optionsGrid.AddChild(fishButton);
 		}
 
+		fishButtonGroup.Pressed += OnFishSelected;
+
 		buyButton.Disabled = true;
+		buyButton.FocusMode = FocusModeEnum.None;
 
 		MoneyManager.Instance.MoneyAdded += OnMoneyChanged;
 		MoneyManager.Instance.MoneyRemoved += OnMoneyChanged;
 	}
 
-	public void OnFishSelected(string fishType)
+	public void OnFishSelected(BaseButton button)
 	{
-		currentFishSelection = fishType;
 		buyButton.Disabled = false;
+		buyButton.FocusMode = FocusModeEnum.All;
 	}
 
 	public void OnBuyButtonPressed()
 	{
-		EmitSignal(SignalName.BuyButtonPressed, currentFishSelection);
+		EmitSignal(SignalName.BuyButtonPressed, (fishButtonGroup.GetPressedButton() as FishSelection).FishType);
+		GD.Print($"PURCHASING {(fishButtonGroup.GetPressedButton() as FishSelection).FishType}");
 	}
 
 	public void OnExitButtonPressed()
