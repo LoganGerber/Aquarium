@@ -21,6 +21,7 @@ SaveManager="*res://Scripts/SaveManager.cs"
 ConfigManager="*res://Scripts/ConfigManager.cs"
 FishManager="*res://Scripts/FishManager.cs"
 MoneyManager="*res://Scripts/MoneyManager.cs"
+DebugInputManager="*res://Scripts/DebugInputManager.cs"
 
 [debug]
 
