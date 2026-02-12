@@ -45,15 +45,21 @@ public partial class Shop : PanelContainer
 			fishButton.Icon = FishManager.Instance.GetFishTexture(fish);
 			fishButton.FishType = fish;
 			fishButton.FishSelected += OnFishSelected;
+			fishButton.Cost = fishPrice;
 			if (fishPrice > currentMoney)
 			{
 				fishButton.Disabled = true;
 				fishButton.FocusMode = FocusModeEnum.None;
-
 			}
 
-			optionsGrid.AddChild(fishButton);
 			fishButtons.Add(fishButton);
+		}
+
+		fishButtons.Sort((one, two) => one.Cost - two.Cost);
+
+		foreach (FishSelection fishButton in fishButtons)
+		{
+			optionsGrid.AddChild(fishButton);
 		}
 
 		buyButton.Disabled = true;
