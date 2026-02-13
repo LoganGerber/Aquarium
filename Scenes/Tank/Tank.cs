@@ -19,17 +19,6 @@ public partial class Tank : Control
 		shop.ExitButtonPressed += OnShopExitButtonPressed;
 	}
 
-	public override void _Input(InputEvent @event)
-	{
-		if (@event is InputEventKey key)
-		{
-			if (key.Pressed && key.Keycode == Key.Escape)
-			{
-				GetTree().Quit();
-			}
-		}
-	}
-
 	public void OnShopIconPressed()
 	{
 		EnableShop();
