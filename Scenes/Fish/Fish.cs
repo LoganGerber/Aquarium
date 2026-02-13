@@ -7,17 +7,17 @@ public partial class Fish : Node2D
 	[Export]
 	private string fishType;
 
-	private bool isHovered;
+	[Export]
+	private Texture2D texture;
 
-	private CapsuleShape2D collider;
+	[Export]
+	private Texture2D outlineTexture;
+
+	private bool isHovered;
 
 	private float bobSpeed;
 
 	private float bobPhase;
-
-	private Texture2D texture;
-
-	private Texture2D outlineTexture;
 
 
 
@@ -38,6 +38,10 @@ public partial class Fish : Node2D
 		set
 		{
 			fishType = value;
+
+			texture = FishManager.Instance.GetFishTexture(fishType);
+			outlineTexture = FishManager.Instance.GetFishOutlineTexture(fishType);
+
 			if (isHovered)
 			{
 				sprite.Texture = outlineTexture;
@@ -76,7 +80,6 @@ public partial class Fish : Node2D
 	public override void _Ready()
 	{
 		sprite = GetNode<Sprite2D>("%Sprite");
-		collider = (CapsuleShape2D)GetNode<CollisionShape2D>("%Collider").Shape;
 
 		bobSpeed = ConfigManager.Instance.GetFishBobSpeed(fishType);
 		ConfigManager.Instance.BobSpeedUpdated += OnBobSpeedUpdated;
@@ -107,7 +110,12 @@ public partial class Fish : Node2D
 
 	public void OnMouseEntered()
 	{
-		isHovered = true;
+		IsHovered = true;
+	}
+
+	public void OnMouseExited()
+	{
+		IsHovered = false;
 	}
 
 	public void OnBobSpeedUpdated(string fishType, float newBobSpeed)

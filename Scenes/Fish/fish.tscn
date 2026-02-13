@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bcxt404h6ay68"]
+[gd_scene load_steps=16 format=3 uid="uid://bcxt404h6ay68"]
 
 [ext_resource type="Script" uid="uid://dcgqiqe6kjjb3" path="res://Scenes/Fish/Fish.cs" id="1_r17d5"]
 [ext_resource type="Texture2D" uid="uid://df2o2p0ypk3xt" path="res://Assets/Pixel Gnome Fishing Pack/Salt Water/Anchovy.png" id="2_2ykiy"]
 [ext_resource type="Script" uid="uid://n7cmcr0svucq" path="res://AI/Tasks/FishAI/select_new_point.gd" id="3_botaw"]
+[ext_resource type="Texture2D" uid="uid://dxajtmrpqthia" path="res://Assets/Pixel Gnome Fishing Pack/Salt Water/Anchovy Outline.png" id="3_g2hud"]
 [ext_resource type="Script" uid="uid://djstbr1vxt3de" path="res://AI/Tasks/FishAI/move_to_point.gd" id="4_2ykiy"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_rrrj0"]
@@ -37,8 +38,11 @@ root_task = SubResource("BTSequence_kc0gn")
 radius = 8.0
 height = 18.0
 
-[node name="Node2D" type="Node2D"]
+[node name="Fish" type="Node2D"]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_r17d5")
+texture = ExtResource("2_2ykiy")
+outlineTexture = ExtResource("3_g2hud")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -49,9 +53,13 @@ texture = ExtResource("2_2ykiy")
 behavior_tree = SubResource("BehaviorTree_g2hud")
 blackboard_plan = SubResource("BlackboardPlan_vddew")
 
-[node name="Fish" type="Area2D" parent="."]
+[node name="FishArea" type="Area2D" parent="."]
+unique_name_in_owner = true
 
-[node name="Collider" type="CollisionShape2D" parent="Fish"]
+[node name="Collider" type="CollisionShape2D" parent="FishArea"]
 unique_name_in_owner = true
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_q28ix")
+
+[connection signal="mouse_entered" from="FishArea" to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="FishArea" to="." method="OnMouseExited"]
