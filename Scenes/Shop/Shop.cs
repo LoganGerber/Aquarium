@@ -24,6 +24,8 @@ public partial class Shop : PanelContainer
 
 	private List<FishSelection> fishButtons;
 
+	private Label moneyLabel;
+
 
 
 	public override void _Ready()
@@ -34,6 +36,7 @@ public partial class Shop : PanelContainer
 		optionsGrid = GetNode<GridContainer>("%FishOptions");
 		buyButton = GetNode<Button>("%BuyButton");
 		exitButton = GetNode<Button>("%ExitButton");
+		moneyLabel = GetNode<Label>("%MoneyLabel");
 
 		string[] allFishTypes = ConfigManager.Instance.GetAllFishTypes();
 		int currentMoney = MoneyManager.Instance.GetCurrentMoney();
@@ -92,6 +95,9 @@ public partial class Shop : PanelContainer
 	public void OnMoneyChanged(int _)
 	{
 		int newMoney = MoneyManager.Instance.GetCurrentMoney();
+
+		moneyLabel.Text = $"${newMoney}";
+
 		FishSelection selectedFish = fishButtonGroup.GetPressedButton() as FishSelection;
 
 		foreach (FishSelection fishButton in fishButtons)

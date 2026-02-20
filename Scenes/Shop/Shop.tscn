@@ -7,7 +7,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vauai"]
 bg_color = Color(0.49747366, 0.49747372, 0.49747354, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wcs23"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lgpxb"]
 
 [node name="Shop" type="PanelContainer"]
 custom_minimum_size = Vector2(600, 0)
@@ -25,50 +25,60 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 1
+theme_override_constants/separation = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_horizontal = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(0, 300)
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
+follow_focus = true
 
-[node name="FishOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer/ScrollContainer"]
+[node name="FishOptions" type="GridContainer" parent="MarginContainer/HBoxContainer/PanelContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 columns = 5
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_wcs23")
+theme_override_constants/separation = 30
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/PanelContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-color = Color(1, 1, 1, 0)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-alignment = 1
+text = "Current:"
 
-[node name="BuyButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MoneyLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "$280"
+horizontal_alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(193.38, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lgpxb")
+
+[node name="BuyButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Buy"
 
-[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Exit"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BuyButton" to="." method="OnBuyButtonPressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/BuyButton" to="." method="OnBuyButtonPressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
