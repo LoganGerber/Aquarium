@@ -26,6 +26,14 @@ public partial class Shop : PanelContainer
 
 	private Label moneyLabel;
 
+	private TextureRect selectedFishTexture;
+
+	private Label selectedFishName;
+
+	private Label costText;
+
+	private Label selectedFishCost;
+
 
 
 	public override void _Ready()
@@ -34,12 +42,19 @@ public partial class Shop : PanelContainer
 		fishButtons = new List<FishSelection>();
 
 		optionsGrid = GetNode<GridContainer>("%FishOptions");
+		moneyLabel = GetNode<Label>("%MoneyLabel");
+		selectedFishTexture = GetNode<TextureRect>("%SelectedFishTexture");
+		selectedFishName = GetNode<Label>("%SelectedFishName");
+		costText = GetNode<Label>("%CostText");
+		selectedFishCost = GetNode<Label>("%SelectedFishCost");
 		buyButton = GetNode<Button>("%BuyButton");
 		exitButton = GetNode<Button>("%ExitButton");
-		moneyLabel = GetNode<Label>("%MoneyLabel");
 
 		string[] allFishTypes = ConfigManager.Instance.GetAllFishTypes();
 		int currentMoney = MoneyManager.Instance.GetCurrentMoney();
+
+		moneyLabel.Text = $"${currentMoney}";
+
 		foreach (string fish in allFishTypes)
 		{
 			int fishPrice = ConfigManager.Instance.GetFishCost(fish);
@@ -79,12 +94,17 @@ public partial class Shop : PanelContainer
 	{
 		buyButton.Disabled = false;
 		buyButton.FocusMode = FocusModeEnum.All;
+
+		FishSelection selection = button as FishSelection;
+		selectedFishTexture.Texture = selection.Icon;
+		selectedFishName.Text = selection.FishType;
+		costText.Visible = true;
+		selectedFishCost.Text = $"${selection.Cost}";
 	}
 
 	public void OnBuyButtonPressed()
 	{
 		EmitSignal(SignalName.BuyButtonPressed, (fishButtonGroup.GetPressedButton() as FishSelection).FishType);
-		GD.Print($"PURCHASING {(fishButtonGroup.GetPressedButton() as FishSelection).FishType}");
 	}
 
 	public void OnExitButtonPressed()
@@ -120,6 +140,11 @@ public partial class Shop : PanelContainer
 					fishButton.ButtonPressed = false;
 					buyButton.Disabled = true;
 					buyButton.FocusMode = FocusModeEnum.None;
+
+					selectedFishTexture.Texture = null;
+					selectedFishName.Text = "";
+					costText.Visible = false;
+					selectedFishCost.Text = "";
 				}
 			}
 		}
