@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using System;
 using System.Linq;
 
 public partial class FishManager : Singleton<FishManager>
@@ -58,7 +57,7 @@ public partial class FishManager : Singleton<FishManager>
 		SetFishList(data.fishInfo);
 	}
 
-	public void OnFishPurchased(string fishType)
+	public void AddFish(string fishType)
 	{
 		FishData newFish = new FishData(++maxID, fishType, 0);
 		allFish.Add(newFish);
@@ -66,7 +65,7 @@ public partial class FishManager : Singleton<FishManager>
 		EmitSignal(SignalName.FishAdded, newFish);
 	}
 
-	public void OnFishSold(int ID)
+	public void RemoveFish(int ID)
 	{
 		allFish.Remove(allFish.First((fish) => fish.ID == ID));
 

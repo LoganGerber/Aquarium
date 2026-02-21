@@ -13,6 +13,9 @@ public partial class Fish : Node2D
 	[Export]
 	private Texture2D outlineTexture;
 
+	[Export]
+	private double speed;
+
 	private bool isHovered;
 
 	private float bobSpeed;
@@ -20,9 +23,6 @@ public partial class Fish : Node2D
 	private float bobPhase;
 
 
-
-	[Export]
-	public double Speed { get; set; }
 
 	public int ID { get; set; }
 
@@ -41,17 +41,20 @@ public partial class Fish : Node2D
 
 			texture = FishManager.Instance.GetFishTexture(fishType);
 			outlineTexture = FishManager.Instance.GetFishOutlineTexture(fishType);
-
-			if (isHovered)
-			{
-				sprite.Texture = outlineTexture;
-			}
-			else
-			{
-				sprite.Texture = texture;
-			}
-
 			bobSpeed = ConfigManager.Instance.GetFishBobSpeed(fishType);
+			speed = ConfigManager.Instance.GetFishSpeed(fishType);
+
+			if (IsNodeReady())
+			{
+				if (isHovered)
+				{
+					sprite.Texture = outlineTexture;
+				}
+				else
+				{
+					sprite.Texture = texture;
+				}
+			}
 		}
 	}
 
@@ -80,11 +83,12 @@ public partial class Fish : Node2D
 	public override void _Ready()
 	{
 		sprite = GetNode<Sprite2D>("%Sprite");
+		sprite.Texture = texture;
 
 		bobSpeed = ConfigManager.Instance.GetFishBobSpeed(fishType);
 		ConfigManager.Instance.BobSpeedUpdated += OnBobSpeedUpdated;
 
-		Speed = ConfigManager.Instance.GetFishSpeed(fishType);
+		speed = ConfigManager.Instance.GetFishSpeed(fishType);
 		ConfigManager.Instance.SpeedUpdated += OnSpeedUpdated;
 	}
 
@@ -130,7 +134,7 @@ public partial class Fish : Node2D
 	{
 		if (string.Equals(fishType, this.fishType))
 		{
-			Speed = newSpeed;
+			speed = newSpeed;
 		}
 	}
 }

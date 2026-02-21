@@ -17,7 +17,7 @@ func _enter() -> void:
 		agentSprite.flip_h = false
 
 func _tick(delta: float) -> Status:
-	var speed: float = agent2D.get("Speed") as float
+	var speed: float = agent2D.get("speed") as float
 	var moveScalar: float = speed * delta
 
 	var remainingDistance: float = agent2D.global_position.distance_to(point)

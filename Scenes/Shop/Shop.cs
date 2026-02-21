@@ -104,7 +104,12 @@ public partial class Shop : PanelContainer
 
 	public void OnBuyButtonPressed()
 	{
-		EmitSignal(SignalName.BuyButtonPressed, (fishButtonGroup.GetPressedButton() as FishSelection).FishType);
+		string fishType = (fishButtonGroup.GetPressedButton() as FishSelection).FishType;
+		EmitSignal(SignalName.BuyButtonPressed, fishType);
+		if (MoneyManager.Instance.SpendMoney(ConfigManager.Instance.GetFishCost(fishType)))
+		{
+			FishManager.Instance.AddFish(fishType);
+		}
 	}
 
 	public void OnExitButtonPressed()

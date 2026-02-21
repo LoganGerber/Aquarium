@@ -2,6 +2,10 @@ using Godot;
 
 public partial class Tank : Control
 {
+	[Export]
+	private PackedScene fishScene;
+
+
 	private FishManager fishManager;
 	private Shop shop;
 	private TextureButton shopIcon;
@@ -17,6 +21,8 @@ public partial class Tank : Control
 
 		DisableShop();
 		shop.ExitButtonPressed += OnShopExitButtonPressed;
+
+		FishManager.Instance.FishAdded += OnFishAdded;
 	}
 
 	public void OnShopIconPressed()
@@ -40,5 +46,17 @@ public partial class Tank : Control
 	{
 		shop.Visible = false;
 		shopIcon.Visible = true;
+	}
+
+	private void OnFishAdded(FishData fishData)
+	{
+		Fish newFish = fishScene.Instantiate<Fish>();
+
+		newFish.FishType = fishData.FishType;
+		newFish.Name = $"Fish{newFish.ID}";
+		newFish.ID = fishData.ID;
+		newFish.Score = fishData.Score;
+
+		AddChild(newFish);
 	}
 }
