@@ -40,17 +40,7 @@ fishButtonGroup = SubResource("ButtonGroup_cr1fc")
 
 [node name="ShopIcon" parent="." instance=ExtResource("3_cvm15")]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -78.0
-offset_top = -71.0
-offset_right = 434.0
-offset_bottom = 441.0
-grow_horizontal = 0
-grow_vertical = 0
+position = Vector2(1076, 596)
+scale = Vector2(0.115, 0.115)
 
-[connection signal="pressed" from="ShopIcon" to="." method="OnShopIconPressed"]
+[connection signal="Pressed" from="ShopIcon" to="." method="OnShopIconPressed"]

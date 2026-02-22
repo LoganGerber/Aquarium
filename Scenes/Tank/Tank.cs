@@ -9,7 +9,7 @@ public partial class Tank : Control
 
 	private FishManager fishManager;
 	private Shop shop;
-	private TextureButton shopIcon;
+	private ShopIcon shopIcon;
 
 
 
@@ -18,7 +18,7 @@ public partial class Tank : Control
 		base._Ready();
 
 		shop = GetNode<Shop>("%Shop");
-		shopIcon = GetNode<TextureButton>("%ShopIcon");
+		shopIcon = GetNode<ShopIcon>("%ShopIcon");
 
 		DisableShop();
 		shop.ExitButtonPressed += OnShopExitButtonPressed;
