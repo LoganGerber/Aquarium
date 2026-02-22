@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bcxt404h6ay68"]
+[gd_scene load_steps=17 format=3 uid="uid://bcxt404h6ay68"]
 
 [ext_resource type="Script" uid="uid://dcgqiqe6kjjb3" path="res://Scenes/Fish/Fish.cs" id="1_r17d5"]
 [ext_resource type="Texture2D" uid="uid://df2o2p0ypk3xt" path="res://Assets/Pixel Gnome Fishing Pack/Salt Water/Anchovy.png" id="2_2ykiy"]
@@ -15,12 +15,14 @@ max_duration = 1.0
 [sub_resource type="BTAction" id="BTAction_g2hud"]
 script = ExtResource("3_botaw")
 
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_g2hud"]
+
 [sub_resource type="BTAction" id="BTAction_vddew"]
 script = ExtResource("4_2ykiy")
 
 [sub_resource type="BTSequence" id="BTSequence_30gcr"]
 custom_name = "BasicMove"
-children = [SubResource("BTAction_g2hud"), SubResource("BTAction_vddew")]
+children = [SubResource("BTAction_g2hud"), SubResource("BTAlwaysFail_g2hud"), SubResource("BTAction_vddew")]
 
 [sub_resource type="BTRandomSelector" id="BTRandomSelector_832ja"]
 children = [SubResource("BTSequence_30gcr")]
@@ -61,5 +63,6 @@ unique_name_in_owner = true
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_q28ix")
 
+[connection signal="input_event" from="FishArea" to="." method="OnFishAreaInputEvent"]
 [connection signal="mouse_entered" from="FishArea" to="." method="OnMouseEntered"]
 [connection signal="mouse_exited" from="FishArea" to="." method="OnMouseExited"]

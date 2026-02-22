@@ -122,6 +122,16 @@ public partial class Fish : Node2D
 		IsHovered = false;
 	}
 
+	public void OnFishAreaInputEvent(Node _, InputEvent ev, int __)
+	{
+		if (ev is InputEventMouseButton mouseEvent
+			&& mouseEvent.Pressed
+			&& mouseEvent.ButtonIndex == MouseButton.Left)
+		{
+			GD.Print("Fish mouse button event");
+		}
+	}
+
 	public void OnBobSpeedUpdated(string fishType, float newBobSpeed)
 	{
 		if (string.Equals(fishType, this.fishType))
