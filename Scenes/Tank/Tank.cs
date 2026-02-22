@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class Tank : Control
 {
@@ -52,11 +53,19 @@ public partial class Tank : Control
 	{
 		Fish newFish = fishScene.Instantiate<Fish>();
 
+		Random rand = new Random();
+		Vector2 screenSize = GetViewport().GetVisibleRect().Size;
+		newFish.GlobalPosition = new Vector2(
+			rand.NextSingle() * screenSize.X,
+			rand.NextSingle() * screenSize.Y
+		);
+
 		newFish.FishType = fishData.FishType;
 		newFish.Name = $"Fish{newFish.ID}";
 		newFish.ID = fishData.ID;
 		newFish.Score = fishData.Score;
 
 		AddChild(newFish);
+		MoveChild(newFish, 0);
 	}
 }
