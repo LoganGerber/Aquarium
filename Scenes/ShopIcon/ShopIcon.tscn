@@ -2,16 +2,25 @@
 
 [ext_resource type="Script" uid="uid://hx1wyq1mwv5l" path="res://Scenes/ShopIcon/ShopIcon.cs" id="1_0ihh0"]
 [ext_resource type="Texture2D" uid="uid://bqpoibh61ld3d" path="res://Assets/kenney_game-icons/Vector/shoppingcartoutline.png" id="2_fdfac"]
-[ext_resource type="Texture2D" uid="uid://dwh53kohgtvfb" path="res://Assets/kenney_game-icons/Vector/shoppingcartoutlinedark.png" id="3_suxt1"]
+[ext_resource type="Texture2D" uid="uid://dwh53kohgtvfb" path="res://Assets/kenney_game-icons/Vector/shoppingcartoutlinedark.png" id="3_0ihh0"]
 
-[node name="ShopIcon" type="Area2D"]
+[node name="ShopIcon" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_0ihh0")
 defaultIcon = ExtResource("2_fdfac")
-hoverIcon = ExtResource("3_suxt1")
+hoverIcon = ExtResource("3_0ihh0")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="ShopIconArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ShopIconArea"]
 polygon = PackedVector2Array(-238, -219, 235, -219, 235, 221, -238, 221)
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="ShopIconArea"]
 unique_name_in_owner = true
 texture = ExtResource("2_fdfac")
+
+[connection signal="input_event" from="ShopIconArea" to="." method="OnShopIconAreaInputEvent"]
+[connection signal="mouse_entered" from="ShopIconArea" to="." method="OnHover"]
+[connection signal="mouse_exited" from="ShopIconArea" to="." method="OnUnhover"]

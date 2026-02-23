@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class ShopIcon : Area2D
+public partial class ShopIcon : Control
 {
 	[Signal]
 	public delegate void PressedEventHandler();
@@ -13,20 +13,21 @@ public partial class ShopIcon : Area2D
 	private CompressedTexture2D hoverIcon;
 
 
+	private Area2D shopIconArea;
+
 	private Sprite2D sprite;
 
 
 	public override void _Ready()
 	{
 		base._Ready();
+
+		shopIconArea = GetNode<Area2D>("%ShopIconArea");
 		sprite = GetNode<Sprite2D>("%Sprite");
 		sprite.Texture = defaultIcon;
-
-		MouseEntered += OnHover;
-		MouseExited += OnUnhover;
 	}
 
-	public override void _InputEvent(Viewport _, InputEvent @event, int __)
+	private void OnShopIconAreaInputEvent(Node _, InputEvent @event, int __)
 	{
 		if (@event is InputEventMouseButton mouseEvent
 			&& mouseEvent.Pressed
