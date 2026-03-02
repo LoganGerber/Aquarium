@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://dclp12mseahun"]
+
+[ext_resource type="Script" uid="uid://2x0cvwpbtsbd" path="res://Scenes/Ring/Ring.cs" id="1_0xf3n"]
+[ext_resource type="Shader" uid="uid://ujsumf6tcyl2" path="res://Scenes/Ring/BasicRingShader.tres" id="1_cllql"]
+[ext_resource type="Texture2D" uid="uid://cl0mum3aoe5u8" path="res://Assets/Custom/RingBackHalf.png" id="1_uxqep"]
+[ext_resource type="Texture2D" uid="uid://6m7gkukkagjc" path="res://Assets/Custom/RingFrontHalf.png" id="2_cllql"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xf3n"]
+shader = ExtResource("1_cllql")
+shader_parameter/Color = Color(1, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18gtb"]
+shader = ExtResource("1_cllql")
+shader_parameter/Color = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xf3n"]
+size = Vector2(1, 64)
+
+[node name="Ring" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_0xf3n")
+
+[node name="BackHalf" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_0xf3n")
+texture = ExtResource("1_uxqep")
+
+[node name="FrontHalf" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_18gtb")
+texture = ExtResource("2_cllql")
+offset = Vector2(12.5, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.5, 0)
+shape = SubResource("RectangleShape2D_0xf3n")
