@@ -55,6 +55,8 @@ blackboard_plan = SubResource("BlackboardPlan_vddew")
 
 [node name="FishArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+collision_mask = 0
+monitoring = false
 
 [node name="Collider" type="CollisionShape2D" parent="FishArea"]
 unique_name_in_owner = true
