@@ -50,6 +50,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="Aquarium"
 
+[layer_names]
+
+2d_physics/layer_1="Fish"
+
 [limbo_ai]
 
 behavior_tree/behavior_tree_default_dir="res://AI/Trees"
